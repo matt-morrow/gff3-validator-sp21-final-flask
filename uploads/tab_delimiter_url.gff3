@@ -1,0 +1,34 @@
+##gff-version 3
+##sequence-region ctg123 1300 7600
+#This is a comment line
+ctg123	.	mRNAt	1299%099000	.	.	.	ID=mrna0001;Name=sonichedgehog;Is_circular=yes;Dbxref="AntWeb:AA816246"
+ctg123	.	exon	1300%091500	.	+	2	ID=exon00001=test;Parent=mrna0001;Dbxref="test_DB:AA816246"
+ctg123	.	exon8	1650%091500	.	test	.	ID=exon00002;Parent=mrna0001;Ontology_term="GO:0046703"
+ctg123	.	SO:0000110	3000	3902b	.	+	.	ID=exon00003;Parent=mrna0001;Ontology_term="GO:003b"
+ctg 123	.	exon	5000a	5500	3.4	-	.	ID=exon00004;Parent=mrna0001
+>ctg123	.	exon	7000	9000	a	?	.	ID=exon00005;Parent=mrna0001
+ctg123	.	CDS	1201	1500	.	+	0	ID=cds00001;Parent=mRNA00001=test2
+ctg123	.	CDS	3000	3902	.	+	0	ID=cds00001;Parent=mRNA00001
+ctg123	.	CDS	5000	5500	5.8e-42	+	0	ID=cds00001;Parent=mRNA00001
+ctg123	.	CDS	7000	7600	.	+	0	ID=cds00001;Parent=mRNA00001
+ctg123	.	CDS	1201	1500	.	+	0	ID=cds00002;Parent=mRNA00002;Ontology_term="GO:0046703","GO:004b703"
+ctg123	.	CDS	5000	5500	.	+	0	ID=cds00002;Parent=mRNA00002
+ctg123	.	CDS	7000	7600	.	+	.	ID=cds00002;Parent=mRNA00002
+ctg123	.	CDS	3301	3902	.	+	0	ID=cds00003;Parent=mRNA00003;Gap=Q8 D3 M6 I1 M6
+ctg123	.	CDS 5000	5500	.	+	1	ID=cds00003;Parent=mRNA00003;Gap=M8 D3 M6 I1 M6
+ctg123	.	CDS	7000	7600	.	+	1	ID=cds00003;Parent=mRNA00003;Target=target id 7000 7005
+ctg123	.	CDS	3391	3902	.	+	0	ID=cds00004;Parent=mRNA00003;Target=target_id 7000 7005 -
+ctg123	.	CDS	5000	5500	.	+	1	ID=cds00004;Parent=mRNA00003;Target=target_id 7000 7005 ?
+ctg123	.	CDS	7000	7601	.	+	1	ID=cds00003;Parent=mRNA00003;Target=target_id 7000 6930 +
+##FASTA
+>ctg123
+cttctgggcgtacccgattctcggagaacttgccgcaccattccgccttg
+tgttcattgctgcctgcatgttcattgtctacctcggctacgtgtggcta
+tctttcctcggtgccctcgtgcacggagtcgagaaaccaaagaacaaaaa
+aagaaattaaaatatttattttgctgtggtttttgatgtgtgttttttat
+aatgatttttgatgtgaccaattgtacttttcctttaaatgaaatgtaat
+cttaaatgtatttccgacgaattcgaggcctgaaaagtgtgacgccattc
+gtatttgatttgggtttactatcgaataatgagaattttcaggcttaggc
+ttaggcttaggcttaggcttaggcttaggcttaggcttaggcttaggctt
+aggcttaggcttaggcttaggcttaggcttaggcttaggcttaggcttag
+aatctagctagctatccgaaattcgaggcctgaaaagtgtgacgccattc
