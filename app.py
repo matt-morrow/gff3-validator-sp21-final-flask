@@ -45,7 +45,231 @@ def index():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             process_file(os.path.join(app.config['UPLOAD_FOLDER'], filename), filename)
             return redirect(url_for('uploaded_file', filename=filename))
-    return render_template('index.html')
+    return '''
+    <!DOCTYPE html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>GFF3 Validator</title>
+        <style type="text/css">
+            * {
+                box-sizing: border-box;
+                box-shadow: #333;
+            }
+
+            h1 {
+                margin-bottom: 5px;
+                font-size: 1em;
+                text-align: center;
+                font-weight: 700;
+                color: rgb(88, 88, 88);
+                padding: 5px 0 0 0;
+            }
+
+            .container-width {
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .flex-sect {
+                background-color: #f3f3f3;
+                padding: 5px 20px;
+                font-family: Helvetica, serif;
+            }
+
+            .flex-title {
+                margin-bottom: 25px;
+                font-size: 2em;
+                text-align: center;
+                font-weight: 700;
+                color: rgb(255, 255, 255);
+                padding: 0 5px 0 0;
+            }
+
+            .cards {
+                padding: 20px 0;
+                display: flex;
+                justify-content: space-around;
+                flex-flow: wrap;
+            }
+
+            .form {
+                border-radius: 3px;
+                padding: 10px 15px;
+                background-color: rgba(0, 0, 0, 0.2);
+                left: auto;
+                justify-content: flex-start;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .input {
+                width: 100%;
+                margin-bottom: 15px;
+                padding: 7px 10px;
+                border-radius: 2px;
+                color: #fff;
+                background-color: #554c57;
+                border: none;
+            }
+
+            .label {
+                width: 100%;
+                display: block;
+            }
+
+            .button {
+                width: 100%;
+                margin: 15px 0;
+                background-color: #785580;
+                border: none;
+                color: #fff;
+                border-radius: 2px;
+                padding: 7px 10px;
+                font-size: 1em;
+                cursor: pointer;
+            }
+
+            #card_css {
+                display: flex;
+                position: static;
+                right: auto;
+            }
+
+            #search_term_form {
+                background-image: linear-gradient(#d7d7d7, #d7d7d7);
+                background-repeat: repeat;
+                background-position: left top;
+                background-attachment: scroll;
+                background-size: auto;
+            }
+
+            #search_term_submit {
+                background-image: linear-gradient(#e86464, #e86464);
+                background-repeat: repeat;
+                background-position: left top;
+                background-attachment: scroll;
+                background-size: auto;
+            }
+
+            #search_term_submit:hover {
+                background-image: linear-gradient(#f15555, #f15555);
+                background-repeat: repeat;
+                background-position: left top;
+                background-attachment: scroll;
+                background-size: auto;
+            }
+
+            #search_term_submit:active {
+                background-image: linear-gradient(#38c439, #38c439);
+                background-repeat: repeat;
+                background-position: left top;
+                background-attachment: scroll;
+                background-size: auto;
+            }
+
+            #search_term_label:active {
+                padding: 2px 0 2px 0;
+            }
+
+            .navbar-items-c {
+                display: inline-block;
+                float: left;
+            }
+
+            .navbar {
+                background-color: rgb(0, 0, 0);
+                color: #ddd;
+                min-height: 50px;
+                width: 100%;
+            }
+
+            .navbar-container {
+                margin: 0 auto;
+                width: 95%;
+            }
+
+            .navbar-container::after {
+                content: "";
+                clear: both;
+                display: block;
+            }
+
+            .navbar-menu {
+                padding: 10px 0;
+                display: block;
+                float: right;
+                margin: 0;
+            }
+
+            .navbar-menu-link {
+                margin: 0;
+                color: inherit;
+                text-decoration: none;
+                display: inline-block;
+                padding: 10px 5px;
+            }
+
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td,
+            th {
+                border: 1px solid #4c4c4c;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #d2d2d2;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div data-gjs="navbar" class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-burger">
+                    <div class="navbar-burger-line">
+                    </div>
+                    <div class="navbar-burger-line">
+                    </div>
+                    <div class="navbar-burger-line">
+                    </div>
+                </div>
+                <div data-gjs="navbar-items" class="navbar-items-c">
+                    <nav data-gjs="navbar-menu" class="navbar-menu">
+                        <a href="/" class="navbar-menu-link">Validator Home</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <section class="flex-sect">
+            <div class="container-width">
+                <div class="flex-title">
+                    <h1>Upload New File to Validate</h1>
+                </div>
+                <div class="cards" id="card_css">
+                    <form method=post enctype=multipart/form-data>
+                        <div class="form-group">
+                            <label class="label" id="search_term_label" style="padding: 10px;">File</label>
+                            <input type=file name=file>
+                        </div>
+                        <div class="form-group">
+                            <input type=submit value=Upload class="button" id="search_term_submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </body>
+
+    </html>
+        
+    '''
 
 def process_file(path, filename):
     validateFile(path, filename)
