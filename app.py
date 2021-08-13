@@ -272,9 +272,16 @@ def index():
     '''
 
 def process_file(path, filename):
-    validateFile(path, filename)
-    # with open(path, 'a') as f:
-    #    f.write("\nAdded processed content")
+    try:
+        validateFile(path, filename)
+
+    except:
+        templateLoader = jinja2.FileSystemLoader(searchpath="./templates")
+        env = jinja2.Environment(loader=templateLoader)
+        template = env.get_template('failed.html')
+        outputErrors = open(app.config['DOWNLOAD_FOLDER'] + filename + ".html", 'w')
+        outputErrors.write(template.render())
+
 
 def validateFile(path, filename):
     #Source: http://www.obofoundry.org/ontology/so.html
@@ -661,12 +668,33 @@ def validateFile(path, filename):
                             checkAttributes(splitColumn[8], lines.index(line), decodedLine)
                         except:
                             errors.append(["Error", "Cannot validate column 9 (attributes) due to delimitation issue.", "",  lines.index(line), decodedLine])
-    
-    templateLoader = jinja2.FileSystemLoader(searchpath="./templates")
-    env = jinja2.Environment(loader=templateLoader)
-    template = env.get_template('errors.html')
-    outputErrors = open(app.config['DOWNLOAD_FOLDER'] + filename + ".html", 'w')
-    outputErrors.write(template.render(placeholder="seqIDBound", number=len(errors), errorsToTemplate=errors))
+    try:
+        templateLoader = jinja2.FileSystemLoader(searchpath="./templates")
+        env = jinja2.Environment(loader=templateLoader)
+        
+        if (len(errors) > 0):
+            template = env.get_template('errors.html')
+            outputErrors = open(app.config['DOWNLOAD_FOLDER'] + filename + ".html", 'w')
+            outputErrors.write(template.render(placeholder="seqIDBound", number=len(errors), errorsToTemplate=errors))                
+                #Testing locally
+                #outputErrors = open("errorlocal" + seqIDBound + ".html", "w")
+                #outputErrors.write(template.render(placeholder="seqIDBound", number=len(errors), errorsToTemplate=errors))
+                #outputErrors.close()
+
+        elif (len(errors) == 0):
+            template = env.get_template('success.html')
+            outputErrors = open(app.config['DOWNLOAD_FOLDER'] + filename + ".html", 'w')
+            outputErrors.write(template.render(number=len(errors)))
+        else:
+            template = env.get_template('failed.html')
+            outputErrors = open(app.config['DOWNLOAD_FOLDER'] + filename + ".html", 'w')
+            outputErrors.write(template.render())
+    except:
+        templateLoader = jinja2.FileSystemLoader(searchpath="./templates")
+        env = jinja2.Environment(loader=templateLoader)
+        template = env.get_template('failed.html')
+        outputErrors = open(app.config['DOWNLOAD_FOLDER'] + filename + ".html", 'w')
+        outputErrors.write(template.render())
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
