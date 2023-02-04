@@ -23,5 +23,5 @@ Flask/Docker Implementation of GFF3 Validator
 - Need internet connection to download the latest SO and GO Terms. Local use is not setup so an error will occur if the downloads fail
 - Error handling is not defined therefore errors within the program itself will take the user to a try again page without specifying the error that occurred.
 - [Docker Hub - mmorro14](https://hub.docker.com/r/mmorro14/gff3-validator)
-- [GitHub - mmjh2021 - gff3-validator-flask repository](https://github.com/mmjh2021/gff3-validator-sp21-final-flask)
+- [GitHub - matt-morrow - gff3-validator-flask repository](https://github.com/matt-morrow/gff3-validator-sp21-final-flask)
 
